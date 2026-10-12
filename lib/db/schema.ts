@@ -295,6 +295,17 @@ export const complaints = pgTable('complaints', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
 })
 
+export const auditLogs = pgTable('audit_logs', {
+  id: text('id').primaryKey(),
+  actorUserId: text('actor_user_id').notNull(),
+  action: text('action').notNull(),
+  entityType: text('entity_type').notNull(),
+  entityId: text('entity_id').notNull(),
+  beforeState: jsonb('before_state'),
+  afterState: jsonb('after_state'),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+})
+
 export const notifications = pgTable('notifications', {
   id: text('id').primaryKey(),
   userId: text('user_id').notNull(),
@@ -334,6 +345,7 @@ export const schema = {
   payouts,
   reviews,
   complaints,
+  auditLogs,
   notifications,
 }
 

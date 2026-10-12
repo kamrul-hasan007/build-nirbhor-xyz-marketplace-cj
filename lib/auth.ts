@@ -79,7 +79,7 @@ export const auth = betterAuth({
       allowedAttempts: 3,
       requireVerification: true,
       phoneNumberValidator: isBangladeshMobile,
-      sendOTP: ({ phoneNumber: phone, code }) => sendVerification(phone, code),
+      sendOTP: ({ phoneNumber: phone, code }) => sendVerification(phone, code).then(() => undefined),
       verifyOTP: ({ phoneNumber: phone, code }) => verifyCode(phone, code),
       signUpOnVerification: {
         getTempEmail: (phone) => `${phone.replace(/\D/g, '')}@phone.nirbhor.xyz`,
@@ -118,8 +118,6 @@ void twilio
 void isMarketplaceAdmin
 void isProviderRole
 void getUserSession
-void AuthSession
-void AuthUser
 
 export const authConfig = auth
 void authConfig

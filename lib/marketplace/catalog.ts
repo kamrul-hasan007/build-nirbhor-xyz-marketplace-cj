@@ -5,7 +5,7 @@ import { areas, cities, packages, serviceCategories, services } from '@/lib/db/s
 export async function getMarketplaceCatalog() {
   const [cityRows, areaRows, categoryRows, serviceRows] = await Promise.all([
     db.select({ id: cities.id, name: cities.name }).from(cities).where(eq(cities.isActive, true)).orderBy(asc(cities.name)),
-    db.select({ id: areas.id, cityId: areas.cityId, name: areas.name }).from(areas).where(eq(areas.isActive, true)).orderBy(asc(areas.name)),
+    db.select({ id: areas.id, cityId: areas.cityId, name: areas.name, codEnabled: areas.codEnabled }).from(areas).where(eq(areas.isActive, true)).orderBy(asc(areas.name)),
     db
       .select({ id: serviceCategories.id, name: serviceCategories.name, slug: serviceCategories.slug, description: serviceCategories.description })
       .from(serviceCategories)
